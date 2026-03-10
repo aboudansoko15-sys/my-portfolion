@@ -1,0 +1,1273 @@
+/* ============================================================
+   ALEX RIVERA — PORTFOLIO  |  styles.css
+   ============================================================
+
+   TABLE OF CONTENTS
+   1.  Variables & Reset
+   2.  Base Typography
+   3.  Layout Utilities
+   4.  Scroll Animations  ← PROMPT 7.1
+   5.  Custom Cursor
+   6.  Navigation         ← PROMPT 7.2
+   7.  Hero               ← PROMPT 3
+   8.  About              ← PROMPT 4
+   9.  Work / Projects    ← PROMPT 5
+   10. Skills             ← PROMPT 5.1
+   11. Contact            ← PROMPT 6.1
+   12. Footer             ← PROMPT 6.1
+   13. Responsive         ← PROMPT 7.3
+   14. Polish & A11y      ← PROMPT 7.3
+   ============================================================ */
+
+
+/* ── 1. Variables & Reset ───────────────────────────────────── */
+:root {
+  /* Colours */
+  --bg:           #0a0d14;
+  --bg-surface:   #0d1117;
+  --card:         #111827;
+  --card-hover:   #161f30;
+  --border:       rgba(99, 102, 241, .18);
+  --accent:       #6366f1;
+  --accent-light: #818cf8;
+  --accent-pale:  rgba(99, 102, 241, .12);
+  --text-1:       #f0f2f8;
+  --text-2:       #8b95b0;
+  --text-3:       #4a5568;
+
+  /* Typography — PROMPT 2: Space Grotesk + Inter */
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body:    'Inter', sans-serif;
+  --font-mono:    'Space Grotesk', monospace;
+
+  /* Easing */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --nav-h:  68px;
+  --radius: 14px;
+  --max-w:  1200px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-x: hidden;
+  cursor: none; /* custom cursor replaces default */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+a  { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: inherit; }
+
+
+/* ── 2. Base Typography ─────────────────────────────────────── */
+.mono {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+}
+
+.accent { color: var(--accent); }
+
+/* Outline / stroke treatment for hero name — PROMPT 3 gradient */
+.title-outline {
+  -webkit-text-stroke: 2px var(--accent);
+  color: transparent;
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  margin-bottom: .8rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  color: var(--text-1);
+}
+
+.sep {
+  margin-inline: .5rem;
+  color: var(--accent);
+}
+
+
+/* ── 3. Layout Utilities ────────────────────────────────────── */
+.container {
+  width: 92%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+}
+
+/* fluid vertical padding — PROMPT 7.3: no fixed widths */
+.section-pad {
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.section-header {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.section-header--center {
+  text-align: center;
+}
+
+
+/* ── 4. Scroll Animations ───────────────────────────────────── */
+/*
+  PROMPT 7.1:
+  - .animate-on-scroll: starts invisible + translated down
+  - .animated: transitions to full opacity + original position
+  - stagger-N classes add delay so grid children animate in sequence
+  - safeFallback ensures content visible even if JS is disabled/slow
+*/
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity  .65s var(--ease-out),
+    transform .65s var(--ease-out);
+  /* 3-second fallback if JS never fires */
+  animation: aosFailsafe 0s 3s forwards;
+}
+
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translateY(0);
+  animation: none;
+}
+
+@keyframes aosFailsafe {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stagger delays for card grids and sequences */
+.stagger-1 { transition-delay: .08s; }
+.stagger-2 { transition-delay: .16s; }
+.stagger-3 { transition-delay: .24s; }
+.stagger-4 { transition-delay: .32s; }
+.stagger-5 { transition-delay: .40s; }
+
+
+/* ── 5. Custom Cursor ───────────────────────────────────────── */
+/* PROMPT 3: cursor glow that follows the mouse */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  width: 38px; height: 38px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition:
+    width   .25s var(--ease-out),
+    height  .25s var(--ease-out),
+    background .25s,
+    border-color .25s,
+    opacity .3s;
+  z-index: 9999;
+  mix-blend-mode: exclusion;
+  will-change: transform;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 5px; height: 5px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+  will-change: transform;
+}
+
+.cursor.hovered {
+  width: 62px; height: 62px;
+  background: var(--accent-pale);
+  border-color: var(--accent-light);
+}
+
+
+/* ── 6. Navigation ──────────────────────────────────────────── */
+/*
+  PROMPT 7.2:
+  - Fixed sticky nav, logo left / links right
+  - Glassmorphism: transparent → frosted glass on scroll
+  - Mobile: hamburger collapses/expands nav links
+*/
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  height: var(--nav-h);
+  /* starts transparent */
+  transition: background .4s, box-shadow .4s, backdrop-filter .4s;
+}
+
+/* Glassmorphism activates when .scrolled is added by JS */
+.navbar.scrolled {
+  background: rgba(10, 13, 20, .72);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 92%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--text-1);
+  transition: color .2s;
+  /* min touch target — PROMPT 7.3 */
+  padding: .3rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+.nav-logo:hover,
+.nav-logo:focus-visible { color: var(--accent-light); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  transition: color .2s;
+  position: relative;
+  padding: .4rem 0;
+  /* min touch target */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Underline slide-in on hover */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s var(--ease-out);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible { color: var(--text-1); }
+.nav-link:hover::after,
+.nav-link:focus-visible::after { transform: scaleX(1); }
+
+/* Active state added by JS */
+.nav-link.active {
+  color: var(--accent-light);
+}
+.nav-link.active::after { transform: scaleX(1); }
+
+/* Hamburger button — hidden on desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 6px;
+  transition: background .2s;
+}
+
+.nav-toggle:hover,
+.nav-toggle:focus-visible {
+  background: var(--accent-pale);
+  outline: none;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px; height: 2px;
+  background: var(--text-1);
+  border-radius: 2px;
+  transition: transform .3s var(--ease-out), opacity .3s, width .3s;
+  transform-origin: center;
+}
+
+/* X animation when open */
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; width: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* ── 7. Hero ────────────────────────────────────────────────── */
+/*
+  PROMPT 3:
+  - Full viewport height (100svh)
+  - Large name with Space Grotesk
+  - Gradient text / stroke treatment
+  - CTA button smooth-scrolls to #work
+  - Cursor glow effect (see section 5)
+  - Animated background: grid + noise + radial glow
+*/
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: var(--nav-h);
+}
+
+/* Subtle dot-grid background */
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 50%, black 20%, transparent 100%);
+  will-change: transform; /* GPU-friendly — PROMPT 7.3 */
+}
+
+/* SVG noise texture overlay */
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+  opacity: .5;
+  pointer-events: none;
+}
+
+/* Radial accent glow — GPU-friendly, no repaints */
+.hero-glow {
+  position: absolute;
+  top: 50%; left: 0;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(99,102,241,.07) 0%, transparent 65%);
+  transform: translate(-20%, -50%);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+/* Availability badge */
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: var(--text-2);
+  margin-bottom: 1.5rem;
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+
+/* Pulsing green availability dot */
+.dot-pulse {
+  flex-shrink: 0;
+  width: 8px; height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0   rgba(34,197,94,.5); }
+  70%  { box-shadow: 0 0 0 8px rgba(34,197,94, 0); }
+  100% { box-shadow: 0 0 0 0   rgba(34,197,94, 0); }
+}
+
+/* Large name — PROMPT 3 */
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 13rem);
+  font-weight: 700;
+  line-height: .92;
+  letter-spacing: -.03em;
+  margin-bottom: 1.5rem;
+}
+
+.title-line { display: block; }
+
+/* Tagline */
+.hero-tagline {
+  font-family: var(--font-display);
+  font-size: clamp(.75rem, 1.5vw, .95rem);
+  color: var(--text-2);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.hero-bio {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: var(--text-2);
+  font-weight: 300;
+  margin-bottom: 2.5rem;
+  line-height: 1.75;
+}
+
+/* CTA Buttons — PROMPT 3: hover colour shift + scale */
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: .8rem 1.8rem;
+  min-height: 48px; /* accessible touch target */
+  border-radius: 100px;
+  font-family: var(--font-display);
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition:
+    transform   .25s var(--ease-spring),
+    box-shadow  .25s,
+    background  .2s,
+    color       .2s,
+    border-color .2s;
+  cursor: none;
+  will-change: transform;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--accent-light);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 32px rgba(99,102,241,.45);
+}
+
+.btn-ghost {
+  border: 1.5px solid var(--border);
+  color: var(--text-2);
+  background: transparent;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent-light);
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* Scroll hint */
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 6.5rem;
+  right: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  color: var(--text-3);
+  writing-mode: vertical-rl;
+  font-size: .62rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px; height: 50px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scrollLine 1.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes scrollLine {
+  0%   { transform: scaleY(0); transform-origin: top;    }
+  50%  { transform: scaleY(1); transform-origin: top;    }
+  51%  { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* Ticker marquee */
+.hero-ticker {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  background: rgba(99,102,241,.04);
+  padding-block: .75rem;
+}
+
+.ticker-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: ticker 26s linear infinite;
+  font-family: var(--font-display);
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  will-change: transform;
+}
+
+.ticker-dot { color: var(--accent); }
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.ticker-track:hover { animation-play-state: paused; }
+
+
+/* ── 8. About ───────────────────────────────────────────────── */
+/*
+  PROMPT 4:
+  - Heading "About Me"
+  - Profile photo (400×400 placehold.co)
+  - 2–3 sentence bio
+  - Side-by-side on desktop (CSS Grid 2-col), stacks on mobile
+  - Creative photo border treatment
+  - .animate-on-scroll
+*/
+.about {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+}
+
+.about-heading {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.about-label {
+  display: block;
+  color: var(--accent);
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  margin-bottom: .6rem;
+}
+
+.about-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--text-1);
+}
+
+/* 2-column grid: photo | text */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+/* Photo column */
+.about-image-wrap {
+  position: relative;
+  max-width: 400px;
+}
+
+/*
+  Creative shape treatment:
+  - rounded corners
+  - gradient accent border via ::before
+  - colour overlay via ::after
+  - zoom on hover via .about-img transition
+*/
+.about-img-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--card);
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 20px 50px rgba(0,0,0,.4);
+  transition: box-shadow .4s;
+}
+
+.about-img-frame:hover {
+  box-shadow:
+    0 0 0 1px rgba(99,102,241,.4),
+    0 28px 60px rgba(0,0,0,.5);
+}
+
+/* Gradient accent border */
+.about-img-frame::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--accent) 0%, transparent 50%, var(--accent-light) 100%);
+  z-index: -1;
+  opacity: .55;
+}
+
+/* Colour wash overlay */
+.about-img-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, transparent 55%, rgba(99,102,241,.18) 100%);
+  pointer-events: none;
+}
+
+.about-img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .6s var(--ease-out);
+  will-change: transform;
+}
+
+.about-image-wrap:hover .about-img { transform: scale(1.05); }
+
+/* Decorative corner accent */
+.about-img-deco {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 56px; height: 56px;
+  background: var(--accent);
+  opacity: .18;
+  border-top-left-radius: 20px;
+  pointer-events: none;
+}
+
+/* Text column */
+.about-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: .5rem;
+}
+
+.about-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -.01em;
+  color: var(--text-1);
+  margin-bottom: 1.2rem;
+}
+
+.about-bio {
+  color: var(--text-2);
+  font-size: clamp(.95rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.78;
+  max-width: 50ch;
+  margin-bottom: 1rem;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin-top: 1.4rem;
+}
+
+.tag {
+  padding: .38rem .95rem;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  color: var(--text-2);
+  text-transform: uppercase;
+  transition: border-color .2s, color .2s, background .2s;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent-light);
+  background: var(--accent-pale);
+}
+
+
+/* ── 9. Work / Projects ─────────────────────────────────────── */
+/*
+  PROMPT 5:
+  - 3-col desktop / 2-col tablet / 1-col mobile responsive grid
+  - Each card: image, title, 1-line description
+  - Hover: overlay reveals description, image zooms, card lifts
+  - Rounded corners, box-shadow, elevation on hover
+  - .animate-on-scroll with staggered delays
+*/
+.work {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+/* 3-col grid — switches to 2 and 1 via media queries below */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* Individual card */
+.project-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  /* Elevation + shadow — PROMPT 5 */
+  box-shadow: 0 4px 20px rgba(0,0,0,.25);
+  transition:
+    transform    .35s var(--ease-spring),
+    box-shadow   .35s,
+    border-color .25s,
+    background   .25s;
+  will-change: transform;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+  border-color: rgba(99,102,241,.35);
+  background: var(--card-hover);
+}
+
+.card-link {
+  display: block;
+  cursor: none;
+  /* Focus ring for keyboard users — PROMPT 7.3 */
+}
+
+.card-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+/* Image wrapper — clip + overflow for zoom effect */
+.card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+}
+
+/* Image zoom on hover — PROMPT 5, GPU-friendly */
+.card-img {
+  display: block;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .65s var(--ease-out);
+  will-change: transform;
+}
+
+.card-link:hover .card-img { transform: scale(1.08); }
+
+/* Hover overlay reveals description — PROMPT 5 */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(9, 12, 20, .78);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.4rem;
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+.card-link:hover .card-overlay { opacity: 1; }
+
+.card-desc {
+  font-size: .85rem;
+  color: var(--text-1);
+  font-weight: 300;
+  line-height: 1.5;
+  margin-bottom: .65rem;
+  transform: translateY(8px);
+  transition: transform .35s var(--ease-out);
+}
+
+.card-link:hover .card-desc { transform: translateY(0); }
+
+.card-cta {
+  font-size: .7rem;
+  color: var(--accent-light);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transform: translateY(6px);
+  transition: transform .3s var(--ease-out) .05s;
+}
+
+.card-link:hover .card-cta { transform: translateY(0); }
+
+/* Card text below image */
+.card-info {
+  padding: 1rem 1.2rem 1.2rem;
+}
+
+.card-category {
+  display: block;
+  font-size: .65rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  margin-bottom: .3rem;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text-1);
+  transition: color .2s;
+}
+
+.card-link:hover .card-title { color: var(--accent-light); }
+
+
+/* ── 10. Skills ─────────────────────────────────────────────── */
+/*
+  PROMPT 5.1:
+  - Pill badges / cards in flex-wrap, centred
+  - Subtle bg, border, hover glow
+  - Scroll-triggered animation
+*/
+.skills {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+/* Giant background ghost text */
+.skills-bg-text {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 20vw, 18rem);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(99,102,241,.05);
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: .1em;
+  user-select: none;
+}
+
+/* Flex-wrap badge layout — centred */
+.skills-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .85rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* Individual skill badge/pill */
+.skill-badge {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1.4rem;
+  border-radius: 100px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: default;
+  transition:
+    background    .25s,
+    border-color  .25s,
+    transform     .3s var(--ease-spring),
+    box-shadow    .25s;
+  will-change: transform;
+}
+
+.skill-badge:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  /* Hover glow — PROMPT 5.1 */
+  box-shadow: 0 0 20px rgba(99,102,241,.3), 0 8px 25px rgba(0,0,0,.3);
+}
+
+.skill-icon {
+  font-size: 1rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.skill-name {
+  font-family: var(--font-display);
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  transition: color .2s;
+}
+
+.skill-badge:hover .skill-name { color: var(--text-1); }
+
+
+/* ── 11. Contact ────────────────────────────────────────────── */
+/*
+  PROMPT 6.1:
+  - Heading "Get in Touch"
+  - Short descriptive text
+  - Social icon links: Behance, LinkedIn, Instagram, Email
+  - Email link
+  - Centred, hover effects
+*/
+.contact {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.contact-inner {
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.025em;
+  color: var(--text-1);
+  margin-bottom: 1.4rem;
+}
+
+.contact-sub {
+  color: var(--text-2);
+  font-size: clamp(.95rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  line-height: 1.75;
+  margin-bottom: 2.4rem;
+}
+
+.contact-email {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(.9rem, 1.8vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: .05em;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: .2rem;
+  margin-bottom: 3rem;
+  transition: color .2s, border-color .2s;
+}
+
+.contact-email:hover,
+.contact-email:focus-visible {
+  color: var(--accent-light);
+  border-color: var(--accent-light);
+}
+
+/* Social icon links — centred flex row */
+.social-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .65rem 1.3rem;
+  min-height: 48px; /* touch target */
+  border-radius: 100px;
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: .74rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  transition:
+    color        .2s,
+    border-color .2s,
+    background   .2s,
+    transform    .25s var(--ease-spring);
+  cursor: none;
+  will-change: transform;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  color: var(--accent-light);
+  border-color: var(--accent);
+  background: var(--accent-pale);
+  transform: translateY(-3px);
+}
+
+.social-icon {
+  width: 16px; height: 16px;
+  flex-shrink: 0;
+  transition: color .2s;
+}
+
+
+/* ── 12. Footer ─────────────────────────────────────────────── */
+/* PROMPT 6.1: copyright © 2026 Alex Rivera. Built with AI. */
+.footer {
+  padding-block: 1.6rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .8rem;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.footer-copy {
+  color: var(--text-3);
+  font-size: .65rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.back-top {
+  font-size: .65rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--text-2);
+  transition: color .2s, transform .2s;
+  display: inline-block;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.back-top:hover,
+.back-top:focus-visible {
+  color: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+
+/* ── 13. Responsive ─────────────────────────────────────────── */
+/*
+  PROMPT 7.3: tested at 375px / 768px / 1200px+
+  CSS Grid + Flexbox + clamp() — no fixed widths
+*/
+
+/* Tablet: projects 2-col, nav hamburger at 768px */
+@media (max-width: 900px) {
+  /* About: stack photo above text */
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-image-wrap {
+    max-width: 340px;
+    margin-inline: auto;
+  }
+
+  /* Work: 2-column grid */
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile nav + single column */
+@media (max-width: 700px) {
+
+  /* Hamburger replaces desktop links */
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: rgba(10, 13, 20, .97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    /* Slide up, hidden by default */
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .4s var(--ease-out), opacity .4s;
+    border-bottom: 1px solid var(--border);
+    z-index: 899;
+  }
+
+  /* Smooth open transition */
+  .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links li { width: 100%; }
+
+  .nav-link {
+    display: block;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    font-size: .9rem;
+    min-height: 56px;
+  }
+
+  .nav-link::after { display: none; }
+
+  /* Hero */
+  .hero-title { font-size: clamp(4rem, 20vw, 8rem); }
+  .hero-scroll-hint { display: none; }
+
+  /* Projects: 1-column */
+  .projects-grid { grid-template-columns: 1fr; }
+
+  /* Footer stacks */
+  .footer-inner { flex-direction: column; text-align: center; }
+}
+
+/* Small phones */
+@media (max-width: 420px) {
+  .hero-cta { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+  .social-links { gap: .7rem; }
+}
+
+
+/* ── 14. Polish & Accessibility ─────────────────────────────── */
+/*
+  PROMPT 7.3:
+  - Focus states on all interactive elements
+  - GPU-friendly animations (transform / opacity only)
+  - Smooth transitions on ALL interactive elements
+  - Readable contrast ratios
+  - Touch-device cursor fallback
+*/
+
+/* Focus-visible ring — keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove outline for mouse users */
+:focus:not(:focus-visible) { outline: none; }
+
+/* Disable custom cursor + cursor:none on touch */
+@media (max-width: 480px) {
+  body { cursor: auto; }
+  .cursor, .cursor-dot { display: none; }
+  .btn, .card-link, .social-link, .nav-link { cursor: pointer; }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* Selection highlight */
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Styled scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
