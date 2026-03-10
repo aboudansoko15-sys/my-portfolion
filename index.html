@@ -4,14 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO: PROMPT 7.3 — proper title and meta description -->
-  <title>Alex Rivera — Designer & Animator</title>
-  <meta name="description" content="Portfolio of Alex Rivera, a multidisciplinary designer and animator specialising in motion design, brand identity, UI/UX, and 3D art." />
+  <title>Abou-Bakary Dansoko — Designer & Animator</title>
+  <meta name="description" content="Portfolio of Abou-Bakary Dansoko, an aspiring creative with interests in design, animation, and more." />
 
-  <!-- Favicon placeholder: PROMPT 7.3 -->
-  <link rel="icon" href="https://placehold.co/32x32/6366f1/ffffff?text=AR" type="image/png" />
+  <link rel="icon" href="https://placehold.co/32x32/6366f1/ffffff?text=AD" type="image/png" />
 
-  <!-- Google Fonts: Space Grotesk + Inter (PROMPT 2) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -24,26 +21,18 @@
   <div class="cursor" id="cursor" aria-hidden="true"></div>
   <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
 
-  <!-- ====================================================
-       NAVIGATION — PROMPT 7.2
-       Glassmorphism sticky nav, hamburger on mobile
-       ==================================================== -->
+  <!-- NAVIGATION -->
   <header class="navbar" id="navbar">
     <nav class="nav-inner" aria-label="Main navigation">
-      <!-- Logo / name left -->
-      <a href="#hero" class="nav-logo" aria-label="Alex Rivera — back to top">
-        AR<span class="accent">.</span>
+      <a href="#hero" class="nav-logo" aria-label="Abou-Bakary Dansoko — back to top">
+        AD<span class="accent">.</span>
       </a>
-
-      <!-- Desktop links right -->
       <ul class="nav-links" id="navLinks" role="list">
         <li><a href="#about"   class="nav-link">About</a></li>
         <li><a href="#work"    class="nav-link">Work</a></li>
         <li><a href="#skills"  class="nav-link">Skills</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
-
-      <!-- Hamburger button (mobile) -->
       <button
         class="nav-toggle"
         id="navToggle"
@@ -60,53 +49,43 @@
 
   <main id="main-content">
 
-    <!-- ====================================================
-         HERO — PROMPT 3 (Hero section)
-         Full viewport, large name, tagline, CTA, cursor glow,
-         animated background, smooth-scroll to #work
-         ==================================================== -->
+    <!-- HERO -->
     <section class="hero" id="hero" aria-label="Hero">
-      <!-- Animated background layers -->
-      <div class="hero-bg-grid"     aria-hidden="true"></div>
-      <div class="hero-noise"       aria-hidden="true"></div>
-      <div class="hero-glow"        aria-hidden="true"></div>
+      <div class="hero-bg-grid" aria-hidden="true"></div>
+      <div class="hero-noise"   aria-hidden="true"></div>
+      <div class="hero-glow"    aria-hidden="true"></div>
 
       <div class="hero-content">
-        <!-- Availability badge -->
         <div class="hero-eyebrow animate-on-scroll">
-          <span class="mono">Available for freelance</span>
+          <span class="mono">Always Working</span>
           <span class="dot-pulse" aria-hidden="true"></span>
         </div>
 
-        <!-- Large name heading — PROMPT 3: gradient text treatment -->
         <h1 class="hero-title">
-          <span class="title-line animate-on-scroll stagger-1">Alex</span>
-          <span class="title-line title-outline animate-on-scroll stagger-2">Rivera</span>
+          <span class="title-line animate-on-scroll stagger-1">Abou-Bakary</span>
+          <span class="title-line title-outline animate-on-scroll stagger-2">Dansoko</span>
         </h1>
 
-        <!-- Tagline — PROMPT 3 -->
         <p class="hero-tagline animate-on-scroll stagger-3">
           Designer<span class="sep" aria-hidden="true">—</span>Animator<span class="sep" aria-hidden="true">—</span>Creative Thinker
         </p>
 
         <p class="hero-bio animate-on-scroll stagger-4">
-          Bringing ideas to life through motion,<br />interaction &amp; visual storytelling.
+          An aspiring creative with interests in many different fields.<br />
+          Learning never stops being fun for me.
         </p>
 
-        <!-- CTA — smooth-scrolls to #work -->
         <div class="hero-cta animate-on-scroll stagger-5">
           <a href="#work"    class="btn btn-primary">View My Work</a>
           <a href="#contact" class="btn btn-ghost">Let's Talk</a>
         </div>
       </div>
 
-      <!-- Scroll hint -->
       <div class="hero-scroll-hint animate-on-scroll stagger-5" aria-hidden="true">
         <span class="mono">scroll</span>
         <div class="scroll-line"></div>
       </div>
 
-      <!-- Skills ticker -->
       <div class="hero-ticker" aria-hidden="true">
         <div class="ticker-track">
           <span>Figma</span><span class="ticker-dot">✦</span>
@@ -125,12 +104,7 @@
       </div>
     </section>
 
-    <!-- ====================================================
-         ABOUT — PROMPT 4
-         Section heading, profile photo (placehold.co/400x400),
-         bio paragraphs, photo + text side-by-side (stacks mobile),
-         creative photo border treatment, .animate-on-scroll
-         ==================================================== -->
+    <!-- ABOUT -->
     <section class="about section-pad" id="about" aria-labelledby="about-heading">
       <div class="container">
 
@@ -139,15 +113,13 @@
           <h2 class="about-title animate-on-scroll stagger-1" id="about-heading">About Me</h2>
         </div>
 
-        <!-- Two-column grid: photo left, text right — stacks below 860px -->
         <div class="about-grid">
 
-          <!-- Profile photo — placehold.co/400x400 as required -->
           <div class="about-image-wrap animate-on-scroll stagger-1">
             <div class="about-img-frame">
               <img
                 src="https://placehold.co/400x400"
-                alt="Profile photo of Alex Rivera, Interactive Designer and Animator"
+                alt="Profile photo of Abou-Bakary Dansoko"
                 class="about-img"
                 width="400"
                 height="400"
@@ -156,14 +128,12 @@
             </div>
           </div>
 
-          <!-- Bio text -->
           <div class="about-text">
-            <h3 class="about-name animate-on-scroll stagger-2">Alex Rivera</h3>
+            <h3 class="about-name animate-on-scroll stagger-2">Abou-Bakary Dansoko</h3>
 
             <p class="about-bio animate-on-scroll stagger-3">
-              I'm a multidisciplinary designer who loves bringing ideas to life
-              through motion, interaction, and visual storytelling. Currently
-              finishing my diploma in Interactive Design and Animation.
+              I'm an aspiring creative with interests in many different fields.
+              Learning never stops being fun for me.
             </p>
 
             <p class="about-bio animate-on-scroll stagger-4">
@@ -183,14 +153,7 @@
       </div>
     </section>
 
-    <!-- ====================================================
-         WORK / PROJECTS — PROMPT 5
-         Grid of 6 cards: image, title, 1-line description,
-         hover overlay reveals description, image zoom on hover.
-         3 col desktop / 2 col tablet / 1 col mobile.
-         Rounded corners, box-shadow, card elevation on hover.
-         .animate-on-scroll with staggered card delays.
-         ==================================================== -->
+    <!-- WORK -->
     <section class="work section-pad" id="work" aria-labelledby="work-heading">
       <div class="container">
 
@@ -199,19 +162,12 @@
           <h2 class="section-title animate-on-scroll stagger-1" id="work-heading">Selected Projects</h2>
         </div>
 
-        <!-- 3-col desktop / 2-col tablet / 1-col mobile grid -->
         <div class="projects-grid" role="list">
 
           <article class="project-card animate-on-scroll stagger-1" role="listitem">
             <a href="#" class="card-link" aria-label="View project: Brand Identity — Cafe Luna">
               <div class="card-img-wrap">
-                <img
-                  src="https://placehold.co/600x400/1e1b4b/818cf8?text=Cafe+Luna"
-                  alt="Brand Identity project for Cafe Luna"
-                  class="card-img"
-                  width="600" height="400"
-                />
-                <!-- Hover overlay reveals description -->
+                <img src="https://placehold.co/600x400/1e1b4b/818cf8?text=Cafe+Luna" alt="Brand Identity project for Cafe Luna" class="card-img" width="600" height="400" />
                 <div class="card-overlay" aria-hidden="true">
                   <p class="card-desc">A warm, editorial brand identity for an independent coffee shop.</p>
                   <span class="card-cta mono">View Project →</span>
@@ -227,12 +183,7 @@
           <article class="project-card animate-on-scroll stagger-2" role="listitem">
             <a href="#" class="card-link" aria-label="View project: Motion Reel 2025">
               <div class="card-img-wrap">
-                <img
-                  src="https://placehold.co/600x400/0f2027/6366f1?text=Motion+Reel"
-                  alt="Motion Reel 2025 showreel thumbnail"
-                  class="card-img"
-                  width="600" height="400"
-                />
+                <img src="https://placehold.co/600x400/0f2027/6366f1?text=Motion+Reel" alt="Motion Reel 2025 showreel thumbnail" class="card-img" width="600" height="400" />
                 <div class="card-overlay" aria-hidden="true">
                   <p class="card-desc">A compilation of motion graphics and animation work from 2025.</p>
                   <span class="card-cta mono">View Project →</span>
@@ -248,12 +199,7 @@
           <article class="project-card animate-on-scroll stagger-3" role="listitem">
             <a href="#" class="card-link" aria-label="View project: Fitness App UI Concept">
               <div class="card-img-wrap">
-                <img
-                  src="https://placehold.co/600x400/0a1628/818cf8?text=Fitness+App"
-                  alt="UI concept screens for a fitness tracking app"
-                  class="card-img"
-                  width="600" height="400"
-                />
+                <img src="https://placehold.co/600x400/0a1628/818cf8?text=Fitness+App" alt="UI concept screens for a fitness tracking app" class="card-img" width="600" height="400" />
                 <div class="card-overlay" aria-hidden="true">
                   <p class="card-desc">A dark-mode UI concept for a personal fitness tracking application.</p>
                   <span class="card-cta mono">View Project →</span>
@@ -269,12 +215,7 @@
           <article class="project-card animate-on-scroll stagger-1" role="listitem">
             <a href="#" class="card-link" aria-label="View project: 3D Character Design">
               <div class="card-img-wrap">
-                <img
-                  src="https://placehold.co/600x400/130f2e/a78bfa?text=3D+Character"
-                  alt="3D stylised character model rendered in Blender"
-                  class="card-img"
-                  width="600" height="400"
-                />
+                <img src="https://placehold.co/600x400/130f2e/a78bfa?text=3D+Character" alt="3D stylised character model rendered in Blender" class="card-img" width="600" height="400" />
                 <div class="card-overlay" aria-hidden="true">
                   <p class="card-desc">A stylised character sculpted and rigged in Blender for animation.</p>
                   <span class="card-cta mono">View Project →</span>
@@ -290,12 +231,7 @@
           <article class="project-card animate-on-scroll stagger-2" role="listitem">
             <a href="#" class="card-link" aria-label="View project: Event Poster Series">
               <div class="card-img-wrap">
-                <img
-                  src="https://placehold.co/600x400/1a0a2e/c4b5fd?text=Poster+Series"
-                  alt="Series of event posters with bold typographic design"
-                  class="card-img"
-                  width="600" height="400"
-                />
+                <img src="https://placehold.co/600x400/1a0a2e/c4b5fd?text=Poster+Series" alt="Series of event posters with bold typographic design" class="card-img" width="600" height="400" />
                 <div class="card-overlay" aria-hidden="true">
                   <p class="card-desc">A bold typographic poster series for a local music event.</p>
                   <span class="card-cta mono">View Project →</span>
@@ -311,12 +247,7 @@
           <article class="project-card animate-on-scroll stagger-3" role="listitem">
             <a href="#" class="card-link" aria-label="View project: Interactive Infographic">
               <div class="card-img-wrap">
-                <img
-                  src="https://placehold.co/600x400/0e1a2e/60a5fa?text=Infographic"
-                  alt="Interactive data visualisation infographic"
-                  class="card-img"
-                  width="600" height="400"
-                />
+                <img src="https://placehold.co/600x400/0e1a2e/60a5fa?text=Infographic" alt="Interactive data visualisation infographic" class="card-img" width="600" height="400" />
                 <div class="card-overlay" aria-hidden="true">
                   <p class="card-desc">An interactive data visualisation built with HTML, CSS, and JS.</p>
                   <span class="card-cta mono">View Project →</span>
@@ -329,17 +260,11 @@
             </a>
           </article>
 
-        </div><!-- end .projects-grid -->
+        </div>
       </div>
     </section>
 
-    <!-- ====================================================
-         SKILLS — PROMPT 5.1
-         Pill badges / cards in flex-wrap layout.
-         Subtle bg, border, hover glow. Centred. Scroll animation.
-         Skills: Figma, After Effects, Photoshop, Illustrator,
-                 Blender, HTML/CSS, Premiere Pro
-         ==================================================== -->
+    <!-- SKILLS -->
     <section class="skills section-pad" id="skills" aria-labelledby="skills-heading">
       <div class="skills-bg-text" aria-hidden="true">SKILLS</div>
       <div class="container">
@@ -349,54 +274,41 @@
           <h2 class="section-title animate-on-scroll stagger-1" id="skills-heading">Tools &amp; Craft</h2>
         </div>
 
-        <!-- Flex-wrap badge layout — centred -->
         <div class="skills-badges animate-on-scroll stagger-2" role="list" aria-label="Skills list">
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">✦</span>
             <span class="skill-name">Figma</span>
           </div>
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">◈</span>
             <span class="skill-name">After Effects</span>
           </div>
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">◉</span>
             <span class="skill-name">Photoshop</span>
           </div>
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">◇</span>
             <span class="skill-name">Illustrator</span>
           </div>
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">⬡</span>
             <span class="skill-name">Blender</span>
           </div>
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">⟨/⟩</span>
             <span class="skill-name">HTML / CSS</span>
           </div>
-
           <div class="skill-badge" role="listitem">
             <span class="skill-icon" aria-hidden="true">▶</span>
             <span class="skill-name">Premiere Pro</span>
           </div>
-
         </div>
+
       </div>
     </section>
 
-    <!-- ====================================================
-         CONTACT — PROMPT 6.1
-         Heading "Get in Touch", short text, social icon links
-         (Behance, LinkedIn, Instagram, Email), email link.
-         Centred layout, hover effects on icons/links.
-         ==================================================== -->
+    <!-- CONTACT -->
     <section class="contact section-pad" id="contact" aria-labelledby="contact-heading">
       <div class="container">
         <div class="contact-inner">
@@ -411,19 +323,12 @@
             Let's make something great together.
           </p>
 
-          <!-- Email link -->
-          <a
-            href="mailto:alex@example.com"
-            class="contact-email animate-on-scroll stagger-3"
-            aria-label="Send email to alex@example.com"
-          >
-            alex@example.com
+          <a href="mailto:abou@example.com" class="contact-email animate-on-scroll stagger-3" aria-label="Send email to abou@example.com">
+            abou@example.com
           </a>
 
-          <!-- Social links with inline SVG icons + text labels -->
           <div class="social-links animate-on-scroll stagger-4" role="list" aria-label="Social media links">
 
-            <!-- Behance -->
             <a href="#" class="social-link" aria-label="Behance profile" role="listitem">
               <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
                 <path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 1.202.791 1.86 1.865 1.86.72 0 1.297-.359 1.495-.9h2.396zm-5.025-5.674c-1.072 0-1.721.63-1.87 1.948h3.593c-.064-1.199-.664-1.948-1.723-1.948zM0 5h8.516C11.027 5 12.5 6.49 12.5 8.5c0 1.307-.573 2.38-1.619 3.038C12.383 12.15 13 13.342 13 14.8c0 2.487-1.912 4.2-4.703 4.2H0V5zm5.882 6.117c1.114 0 1.766-.553 1.766-1.47 0-.9-.652-1.447-1.766-1.447H2.4v2.917h3.482zm.414 4.483c1.21 0 1.907-.624 1.907-1.638 0-1.007-.697-1.595-1.907-1.595H2.4v3.233h3.896z"/>
@@ -431,7 +336,6 @@
               <span>Behance</span>
             </a>
 
-            <!-- LinkedIn -->
             <a href="#" class="social-link" aria-label="LinkedIn profile" role="listitem">
               <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -439,7 +343,6 @@
               <span>LinkedIn</span>
             </a>
 
-            <!-- Instagram -->
             <a href="#" class="social-link" aria-label="Instagram profile" role="listitem">
               <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
@@ -447,29 +350,25 @@
               <span>Instagram</span>
             </a>
 
-            <!-- Email icon link -->
-            <a href="mailto:alex@example.com" class="social-link" aria-label="Send an email" role="listitem">
+            <a href="mailto:abou@example.com" class="social-link" aria-label="Send an email" role="listitem">
               <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
               </svg>
               <span>Email</span>
             </a>
 
-          </div><!-- end .social-links -->
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ====================================================
-       FOOTER — PROMPT 6.1
-       Copyright line: © 2026 Alex Rivera. Built with AI.
-       ==================================================== -->
+  <!-- FOOTER -->
   <footer class="footer" role="contentinfo">
     <div class="container footer-inner">
-      <span class="footer-logo" aria-hidden="true">AR<span class="accent">.</span></span>
-      <span class="footer-copy mono">© 2026 Alex Rivera. Built with AI.</span>
+      <span class="footer-logo" aria-hidden="true">AD<span class="accent">.</span></span>
+      <span class="footer-copy mono">© 2026 Abou-Bakary Dansoko. Built with AI.</span>
       <a href="#hero" class="back-top mono" aria-label="Back to top of page">↑ Top</a>
     </div>
   </footer>
